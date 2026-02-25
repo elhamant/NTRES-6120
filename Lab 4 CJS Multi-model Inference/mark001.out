@@ -1,0 +1,307 @@
+
+ Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+ gfortran(dble/PIM2) Vers. 11.2 Nov 2025  24-Feb-2026 09:54:56    Page  001
+  
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+ Welcome to MARK emily on machine HAMANTTHINKS in subdirectory
+   "C:\github\NTRES-6120\Lab 4 CJS Multi-model Inference" running file "mark001.inp".
+ This version was compiled by GCC version 15.2.0 using the options: 
+  -cpp -iprefix C:/tdm-gcc-64/mingw64-15-2/bin/../lib/gcc/
+  x86_64-w64-mingw32/15.2.0/ -D_MT -D_REENTRANT -U_REENTRANT -D
+  dbleprecision -m64 -march=x86-64 -mtune=generic -mthreads -O3 -std=f2023
+  -fimplicit-none -ffpe-summary=invalid,zero,overflow,underflow
+  -funroll-loops -fno-unsafe-math-optimizations -frounding-math
+  -fsignaling-nans -fprefetch-loop-arrays -fall-intrinsics -fopenmp
+
+ This problem will use 11 of 12 possible threads.
+ Static thread allocation is used.
+ INPUT --- proc title ;
+
+ For procedure title CPU Time was 0.001 secs and System Time was 0.001 secs.
+ INPUT --- proc chmatrix occasions= 7 groups= 2 etype= Live Nodes= 101 
+ INPUT --- ICMeans NoHist hist= 55 ;
+ INPUT ---    time interval 1 1 1 1 1 1 ;
+ INPUT ---    glabel(1)=sexFemale;
+ INPUT ---    glabel(2)=sexMale;
+
+   * *  WARNING  * *   At least a pair of the encounter histories are duplicates. 
+
+      Number of unique encounter histories read was 32.
+
+      Number of individual covariates read was 0.
+      Time interval lengths are all equal to 1.
+
+      Data type number is 1
+      Data type is Live Recaptures (CJS)
+
+ For procedure chmatrix CPU Time was 0.001 secs and System Time was 0.001 secs.
+
+Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+ gfortran(dble/PIM2) Vers. 11.2 Nov 2025  24-Feb-2026 09:54:56    Page  002
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+
+
+ INPUT --- proc estimate link=Logit NOLOOP varest=2ndPart    ;
+ INPUT --- model={ Phi(~cohort + time)p(~sex + time) };
+ INPUT ---    group=1 Phi    rows=6 cols=6 Triang ;
+ INPUT ---        1 2 3 4 5 6 ;
+ INPUT ---        7 8 9 10 11 ;
+ INPUT ---        12 13 14 15 ;
+ INPUT ---        16 17 18 ;
+ INPUT ---        19 20 ;
+ INPUT ---        21 ;
+ INPUT ---    group=2 Phi    rows=6 cols=6 Triang ;
+ INPUT ---        1 2 3 4 5 6 ;
+ INPUT ---        7 8 9 10 11 ;
+ INPUT ---        12 13 14 15 ;
+ INPUT ---        16 17 18 ;
+ INPUT ---        19 20 ;
+ INPUT ---        21 ;
+ INPUT ---    group=1 p    rows=6 cols=6 Triang ;
+ INPUT ---        22 23 24 25 26 27 ;
+ INPUT ---        23 24 25 26 27 ;
+ INPUT ---        24 25 26 27 ;
+ INPUT ---        25 26 27 ;
+ INPUT ---        26 27 ;
+ INPUT ---        27 ;
+ INPUT ---    group=2 p    rows=6 cols=6 Triang ;
+ INPUT ---        28 29 30 31 32 33 ;
+ INPUT ---        29 30 31 32 33 ;
+ INPUT ---        30 31 32 33 ;
+ INPUT ---        31 32 33 ;
+ INPUT ---        32 33 ;
+ INPUT ---        33 ;
+ INPUT ---    design matrix constraints=33 covariates=18;
+ INPUT ---        1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+ INPUT ---        1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0;
+ INPUT ---        1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0;
+ INPUT ---        1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0;
+ INPUT ---        1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0;
+ INPUT ---        1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0;
+ INPUT ---        1 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0;
+ INPUT ---        1 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0;
+ INPUT ---        1 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0;
+ INPUT ---        1 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0;
+ INPUT ---        1 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0;
+ INPUT ---        1 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0;
+ INPUT ---        1 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0;
+
+Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+ gfortran(dble/PIM2) Vers. 11.2 Nov 2025  24-Feb-2026 09:54:56    Page  003
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+ INPUT ---        1 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0;
+ INPUT ---        1 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0;
+ INPUT ---        1 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0;
+ INPUT ---        1 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0;
+ INPUT ---        1 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0;
+ INPUT ---        1 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0;
+ INPUT ---        1 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0;
+ INPUT ---        1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 1 0 1 0 0 0;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 1 0 0;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 1 0;
+ INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 1;
+ INPUT ---       blabel(1)=Phi:(Intercept);
+ INPUT ---       blabel(2)=Phi:cohort1982;
+ INPUT ---       blabel(3)=Phi:cohort1983;
+ INPUT ---       blabel(4)=Phi:cohort1984;
+ INPUT ---       blabel(5)=Phi:cohort1985;
+ INPUT ---       blabel(6)=Phi:cohort1986;
+ INPUT ---       blabel(7)=Phi:time1982;
+ INPUT ---       blabel(8)=Phi:time1983;
+ INPUT ---       blabel(9)=Phi:time1984;
+ INPUT ---       blabel(10)=Phi:time1985;
+ INPUT ---       blabel(11)=Phi:time1986;
+ INPUT ---       blabel(12)=p:(Intercept);
+ INPUT ---       blabel(13)=p:sexMale;
+ INPUT ---       blabel(14)=p:time1983;
+ INPUT ---       blabel(15)=p:time1984;
+ INPUT ---       blabel(16)=p:time1985;
+ INPUT ---       blabel(17)=p:time1986;
+ INPUT ---       blabel(18)=p:time1987;
+ INPUT ---       rlabel(1)=Phi gFemale c1981 a0 t1981;
+ INPUT ---       rlabel(2)=Phi gFemale c1981 a1 t1982;
+ INPUT ---       rlabel(3)=Phi gFemale c1981 a2 t1983;
+ INPUT ---       rlabel(4)=Phi gFemale c1981 a3 t1984;
+ INPUT ---       rlabel(5)=Phi gFemale c1981 a4 t1985;
+ INPUT ---       rlabel(6)=Phi gFemale c1981 a5 t1986;
+ INPUT ---       rlabel(7)=Phi gFemale c1982 a0 t1982;
+ INPUT ---       rlabel(8)=Phi gFemale c1982 a1 t1983;
+
+Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+ gfortran(dble/PIM2) Vers. 11.2 Nov 2025  24-Feb-2026 09:54:58    Page  004
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+ INPUT ---       rlabel(9)=Phi gFemale c1982 a2 t1984;
+ INPUT ---       rlabel(10)=Phi gFemale c1982 a3 t1985;
+ INPUT ---       rlabel(11)=Phi gFemale c1982 a4 t1986;
+ INPUT ---       rlabel(12)=Phi gFemale c1983 a0 t1983;
+ INPUT ---       rlabel(13)=Phi gFemale c1983 a1 t1984;
+ INPUT ---       rlabel(14)=Phi gFemale c1983 a2 t1985;
+ INPUT ---       rlabel(15)=Phi gFemale c1983 a3 t1986;
+ INPUT ---       rlabel(16)=Phi gFemale c1984 a0 t1984;
+ INPUT ---       rlabel(17)=Phi gFemale c1984 a1 t1985;
+ INPUT ---       rlabel(18)=Phi gFemale c1984 a2 t1986;
+ INPUT ---       rlabel(19)=Phi gFemale c1985 a0 t1985;
+ INPUT ---       rlabel(20)=Phi gFemale c1985 a1 t1986;
+ INPUT ---       rlabel(21)=Phi gFemale c1986 a0 t1986;
+ INPUT ---       rlabel(22)=p gFemale c1981 a1 t1982;
+ INPUT ---       rlabel(23)=p gFemale c1981 a2 t1983;
+ INPUT ---       rlabel(24)=p gFemale c1981 a3 t1984;
+ INPUT ---       rlabel(25)=p gFemale c1981 a4 t1985;
+ INPUT ---       rlabel(26)=p gFemale c1981 a5 t1986;
+ INPUT ---       rlabel(27)=p gFemale c1981 a6 t1987;
+ INPUT ---       rlabel(28)=p gMale c1981 a1 t1982;
+ INPUT ---       rlabel(29)=p gMale c1981 a2 t1983;
+ INPUT ---       rlabel(30)=p gMale c1981 a3 t1984;
+ INPUT ---       rlabel(31)=p gMale c1981 a4 t1985;
+ INPUT ---       rlabel(32)=p gMale c1981 a5 t1986;
+ INPUT ---       rlabel(33)=p gMale c1981 a6 t1987;
+   Model is { Phi(~cohort + time)p(~sex + time) }
+
+ Link Function Used is LOGIT        
+
+ Variance Estimation Procedure Used is 2ndPart 
+ -2logL(saturated) = 582.47711     
+ Effective Sample Size = 426
+
+ Number of function evaluations was 45 for 18 parameters.
+ For numerical optimization, CPU Time was 0.781 secs and System Time was 0.281 secs.
+ -2logL { Phi(~cohort + time)p(~sex + time) } = 650.56458     
+ Penalty { Phi(~cohort + time)p(~sex + time) } = 0.0000000     
+ Gradient { Phi(~cohort + time)p(~sex + time) }:
+ -4.23012E-06   0.0000       0.0000     -7.04147E-06 -6.18379E-06
+   0.0000     -4.03218E-06 -5.47773E-06 -6.86089E-06 -5.25167E-06
+ -6.24778E-06   0.0000       0.0000       0.0000     -3.32543E-06
+ -3.43862E-06 -2.75593E-06   0.0000    
+ Maximum ABS(G) { Phi(~cohort + time)p(~sex + time) } =  7.04147E-06
+ To compute VC matrix, CPU Time was 0.359 secs and System Time was 0.281 secs.
+
+Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+ gfortran(dble/PIM2) Vers. 11.2 Nov 2025  24-Feb-2026 09:54:58    Page  005
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+ S Vector { Phi(~cohort + time)p(~sex + time) }:
+   125.6066      31.60997      28.94459      27.59560      21.55311    
+   10.14555      9.359747      7.499975      5.624964      3.513597    
+   3.085275      2.276518      1.802778      1.376125      1.066675    
+  0.4760576     0.3200428     0.1154934    
+ To invert VC matrix, CPU Time was 0.001 secs and System Time was 0.001 secs.
+ Ratio Threshold = 50.00 Max Gap (1/2) = 3.974 Next Max Gap (1/2) = 3.974
+ Gap Method for Num. of Estimated Parameters { Phi(~cohort + time)p(~sex + time) } = 18          
+ Threshold { Phi(~cohort + time)p(~sex + time) } = 0.1408293E-04           
+ Numerical Threshold Method for Num. of Estimated Parameters { Phi(~cohort + time)p(~sex + time) } = 18          
+ Number of Estimated Parameters { Phi(~cohort + time)p(~sex + time) } = 18          
+ DEVIANCE { Phi(~cohort + time)p(~sex + time) } = 68.087470               
+ DEVIANCE Degrees of Freedom { Phi(~cohort + time)p(~sex + time) } = 23          
+ c-hat { Phi(~cohort + time)p(~sex + time) } = 2.9603248               
+ AIC { Phi(~cohort + time)p(~sex + time) } = 686.56458               
+ AICc { Phi(~cohort + time)p(~sex + time) } = 688.24517               
+ BIC { Phi(~cohort + time)p(~sex + time) } = 759.54449               
+ Pearson Chisquare { Phi(~cohort + time)p(~sex + time) } = 188.50370               
+ Possible Encounter Histories { Phi(~cohort + time)p(~sex + time) } = 252          
+ Pearson Chisquare df { Phi(~cohort + time)p(~sex + time) } = 222          
+ Pearson chat { Phi(~cohort + time)p(~sex + time) } = 0.8491157               
+ Sum(Observed/Expected) { Phi(~cohort + time)p(~sex + time) } = 224.71877               
+ s-bar { Phi(~cohort + time)p(~sex + time) } = -0.1136718              
+ Fletcher chat { Phi(~cohort + time)p(~sex + time) } = 0.9580150               
+
+
+         LOGIT Link Function Parameters of { Phi(~cohort + time)p(~sex + time) }
+                                                              95% Confidence Interval
+    Parameter                  Beta         Standard Error     Lower           Upper
+ -------------------------  --------------  --------------  --------------  --------------
+    1:Phi:(Intercept)        0.8035873       0.6794594      -0.5281532       2.1353279    
+    2:Phi:cohort1982        -0.2318249       0.4677296      -1.1485748       0.6849250    
+    3:Phi:cohort1983        -0.6239705       0.5055873      -1.6149217       0.3669807    
+    4:Phi:cohort1984         0.0834950       0.5498027      -0.9941184       1.1611084    
+    5:Phi:cohort1985         0.2337732       0.6220670      -0.9854781       1.4530244    
+    6:Phi:cohort1986        -0.3452339       0.9304521      -2.1689201       1.4784522    
+    7:Phi:time1982          -0.8921283       0.9334573      -2.7217046       0.9374481    
+    8:Phi:time1983          -0.3928012       0.9078051      -2.1720992       1.3864968    
+    9:Phi:time1984          -0.1120116       0.9244140      -1.9238630       1.6998399    
+   10:Phi:time1985          -0.4527546       0.9394852      -2.2941456       1.3886365    
+   11:Phi:time1986           0.2211374       1.7735866      -3.2550923       3.6973671    
+   12:p:(Intercept)          0.6724946       0.8355522      -0.9651877       2.3101769    
+   13:p:sexMale              0.5866027       0.5335223      -0.4591010       1.6323063    
+   14:p:time1983             1.7368818       1.3113254      -0.8333161       4.3070796    
+   15:p:time1984             1.2942609       1.0963265      -0.8545392       3.4430610    
+   16:p:time1985             1.2187359       1.0127774      -0.7663078       3.2037797    
+
+Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+ gfortran(dble/PIM2) Vers. 11.2 Nov 2025  24-Feb-2026 09:54:58    Page  006
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+   17:p:time1986             1.7683514       1.0905229      -0.3690737       3.9057764    
+   18:p:time1987             0.1647646       1.6233603      -3.0170217       3.3465509    
+
+
+            Real Function Parameters of { Phi(~cohort + time)p(~sex + time) }
+                                                               95% Confidence Interval
+     Parameter                Estimate       Standard Error     Lower           Upper
+ --------------------------  --------------  --------------  --------------  --------------
+     1:Phi gFemale c1981 a0   0.6907413       0.1451446       0.3709477       0.8942897       
+     2:Phi gFemale c1981 a1   0.4778792       0.1165474       0.2681431       0.6957165       
+     3:Phi gFemale c1981 a2   0.6012764       0.1182791       0.3644284       0.7986321       
+     4:Phi gFemale c1981 a3   0.6663174       0.1168552       0.4161623       0.8483476       
+     5:Phi gFemale c1981 a4   0.5868195       0.1332623       0.3259801       0.8066034       
+     6:Phi gFemale c1981 a5   0.7358919       0.3067647       0.1121579       0.9839890       
+     7:Phi gFemale c1982 a0   0.4205866       0.0701877       0.2921680       0.5607352       
+     8:Phi gFemale c1982 a1   0.5446213       0.0904507       0.3691499       0.7096713       
+     9:Phi gFemale c1982 a2   0.6129551       0.0980272       0.4133547       0.7806770       
+    10:Phi gFemale c1982 a3   0.5297169       0.1084574       0.3242491       0.7255834       
+    11:Phi gFemale c1982 a4   0.6884536       0.3124305       0.1128314       0.9746164       
+    12:Phi gFemale c1983 a0   0.4469049       0.0682711       0.3198342       0.5813129       
+    13:Phi gFemale c1983 a1   0.5168949       0.0872810       0.3503594       0.6797603       
+    14:Phi gFemale c1983 a2   0.4321369       0.0959423       0.2612577       0.6208521       
+    15:Phi gFemale c1983 a3   0.5988689       0.3396388       0.0854606       0.9597620       
+    16:Phi gFemale c1984 a0   0.6846168       0.0674925       0.5405117       0.8002310       
+    17:Phi gFemale c1984 a1   0.6069066       0.0787691       0.4469983       0.7467705       
+    18:Phi gFemale c1984 a2   0.7517971       0.2574129       0.1685965       0.9783751       
+    19:Phi gFemale c1985 a0   0.6421265       0.0740071       0.4883491       0.7713278       
+    20:Phi gFemale c1985 a1   0.7787674       0.2359409       0.1937813       0.9809718       
+    21:Phi gFemale c1986 a0   0.6636250       0.2395988       0.1939946       0.9417635       
+    22:p gFemale c1981 a1 t   0.6620615       0.1869432       0.2758407       0.9097164       
+    23:p gFemale c1981 a2 t   0.9175395       0.0790856       0.5891988       0.9885483       
+    24:p gFemale c1981 a3 t   0.8772622       0.0826555       0.6135261       0.9698616       
+    25:p gFemale c1981 a4 t   0.8688958       0.0725884       0.6552728       0.9585193       
+    26:p gFemale c1981 a5 t   0.9198895       0.0554560       0.7242995       0.9804647       
+    27:p gFemale c1981 a6 t   0.6978877       0.2827719       0.1428982       0.9697031       
+    28:p gMale c1981 a1 t19   0.7788707       0.1504234       0.3887121       0.9512431       
+    29:p gMale c1981 a2 t19   0.9523921       0.0494390       0.7024194       0.9941364       
+    30:p gMale c1981 a3 t19   0.9277988       0.0542463       0.7243558       0.9843351       
+    31:p gMale c1981 a4 t19   0.9225732       0.0499239       0.7517535       0.9791163       
+    32:p gMale c1981 a5 t19   0.9537989       0.0356526       0.8087161       0.9901775       
+    33:p gMale c1981 a6 t19   0.8059431       0.2307146       0.1873277       0.9868123       
+
+Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+ gfortran(dble/PIM2) Vers. 11.2 Nov 2025  24-Feb-2026 09:54:58    Page  007
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+
+ To compute parameter estimates, CPU Time was 0.016 secs and System Time was 0.031 secs.
+
+ For procedure estimate CPU Time was 1.188 secs and System Time was 1.828 secs.
+ INPUT --- proc stop;
+
+ For this job, CPU Time in mins was 0.021 and System Time in mins was 0.031.
+
+     Time Start = 09:54:56.776   Time End = 09:54:58.636
+
+ Wall Clock Time in mins for this job was 0.031.
+
+ Maximum of 19 words used.
+
+
+          E X E C U T I O N   S U C C E S S F U L
