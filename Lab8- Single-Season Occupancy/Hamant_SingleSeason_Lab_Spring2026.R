@@ -6,7 +6,7 @@
 #### ---------------------------------------------------------------------------- ####
 
 #### Set Working directory
-#setwd("C:/github/NTRES-6120/Lab8- Single-Season Occupancy")
+setwd("C:/github/NTRES-6120/Lab8- Single-Season Occupancy")
 
 #### Install and load necessary packages to make functions accessible
 #install.packages('unmarked')
@@ -30,13 +30,12 @@ head(af)
 #### Step 2: Index out just the detection/non-detection data
 
 detect_af <- af |>
-  select(Visit1:Visit3) |>
+  select(Visit1:Visit3)
   
 
 ## What is the naive occupancy rate?
 
-af |>
-  summarize(count = sum(Visit1 + Visit2 + Visit3), 
+af |> summarize(count = sum(Visit1 + Visit2 + Visit3), 
             total_visit = n()*3, 
             naive_occupany = count/total_visit)
 
@@ -173,7 +172,7 @@ head(est.p) # shows first 6 values
 
 plot(est.p$Predicted ~est.p$time, type = "l", ylim = c(0,1), col = "blue", 
      xlab = "Time of day (standardized)", 
-     ylab = "Expected Occupancy probability")
+     ylab = "Expected Detection probability")
 
 lines(est.p$lower ~ est.p$time, type = "l", col = gray(0.5))
 lines(est.p$upper ~ est.p$time, type = "l", col = gray(0.5))
@@ -190,7 +189,7 @@ woodveg <- af |>
   
 
 #### Step 14: Create an unmarked data frame that includes y, our site-level covariate (standardized woody veg.) and our survey-level covariate (time)
-af_umf3 <- unmarkedFrameOccu(y =as.matrix(detect_af), siteCovs = data.frame(wood = woodveg), 
+af_umf3 <- unmarkedFrameOccu(y =as.matrix(detect_af), siteCovs = data.frame(wood = woodveg, habitat = habitat), 
                                           obsCovs = list(time = time))
 
 #### Step 15: Standardize observation-level covariate(s)
@@ -201,7 +200,7 @@ summary(af_umf3)
 
 #### Step 16: Fit the model and examine estimates
 
-fm3 <- occu(formula = ~ time ~wood, data = af_umf3)
+fm3 <- occu(formula = ~ time ~ wood + habitat, data = af_umf3)
 
 fm3
 
@@ -221,4 +220,5 @@ plot(est2.psi$Predicted ~est2.psi$wood, type = "l", ylim = c(0,1), col = "blue",
 
 lines(est2.psi$lower ~ est2.psi$wood, type = "l", col = gray(0.5))
 lines(est2.psi$upper ~ est2.psi$wood, type = "l", col = gray(0.5))
+
 
